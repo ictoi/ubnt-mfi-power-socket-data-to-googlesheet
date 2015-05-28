@@ -37,11 +37,12 @@ ssh admin@YOUR.MFI.IP.ADDRESS
 * default login admin:admin
 * edit /tmp/system.cfg
 vi /tmp/system.cfg
-* add following 4 lines at the end of the file:
-cron.1.job.1.cmd=MAC=`ifconfig ath0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`;PF1=`cat /proc/power/pf1`;RELAY1=`cat /proc/power/relay1`;V_RMS1=`cat /proc/power/v_rms1`;I_RMS1=`cat /proc/power/i_rms1`;(/usr/bin/wget -b --no-cookies -4 --tries=3 --timeout=10 -o /dev/null -O /dev/null --no-check-certificate --secure-protocol=auto --post-data="mac=$MAC&pf1=$PF1&relay1=$RELAY1&v_rms1=$V_RMS1&i_rms1=$I_RMS1" https://script.google.com/macros/s/SOME_WEB_APP_URL_REPLACE_WHOLE_THE_URL/exec) >/dev/null 2>&1
+* add following 5 lines at the end of the file:
+cron.1.job.1.cmd=M=`ifconfig ath0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`;P=`cat /proc/power/pf1`;R=`cat /proc/power/relay1`;V=`cat /proc/power/v_rms1`;I=`cat /proc/power/i_rms1`;(/usr/bin/wget -b --no-cookies -4 --tries=3 --timeout=10 -o /dev/null -O /dev/null --no-check-certificate --secure-protocol=auto --post-data="mac=$M&pf1=$P&relay1=$R&v_rms1=$V&i_rms1=$I" https://script.google.com/macros/s/YOUR_WEBSERVICE_ID/exec) >/dev/null 2>&1
 cron.1.job.1.schedule=* * * * *
 cron.1.job.1.status=enabled
 cron.1.status=enabled
+cron.status=enabled
 * run command to update flash:
 cfgmtd -f /tmp/system.cfg -w
 * reboot the mfi device with:
