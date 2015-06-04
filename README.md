@@ -48,7 +48,7 @@ ssh ubnt@YOUR.MFI.IP.ADDRESS
 vi /tmp/system.cfg
 ```
 
-* add following 4 lines at the end of the file:
+* add following lines at the end of the file:
 
 ``` bash
 cron.1.job.1.schedule=* * * * *
